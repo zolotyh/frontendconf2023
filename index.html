@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>reveal.js</title>
+    <link rel="stylesheet" href="dist/reset.css" />
+    <link rel="stylesheet" href="dist/reveal.css" />
+    <link rel="stylesheet" href="dist/csshake.min.css" />
+    <link rel="stylesheet" href="css/animate.min.css">
+    <link rel="stylesheet" href="dist/theme/white.css" />
+    <link
+      rel="preload"
+      href="./dist/theme/fonts/work/subset-YanoneKaffeesatz-ExtraLight.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link rel="stylesheet" href="plugin/highlight/monokai.css" />
+    <style>
+    pre>code {
+       font-weight: normal
+    }
+    </style>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+          <h1 class="r-fit-text">
+            Рефакторинг 
+          </h1>
+          <h3 class="r-fit-text">приложений на <b class="animate__animated animate__bounce">JavaScript</b><br> и не только</h3>
+        </section>
+          
+        <section>
+          <div style=" display: flex; flex-direction: row; " >
+            <div style="padding: 1em; width: 30%">
+              <img src="img/me.jpg" alt="">
+                <p>Алексей Золотых</p>
+            </div>
+            <div style="padding: 1em; display: flex; align-items: center; justify-content: center;">
+              <table>
+                <tr>
+                  <td>twitter</td>
+                  <td>
+                    <a href="https://twitter.com/zolotyh">@zolotyh</a>
+                  </td>
+                </tr>
+                <tr>
+                  <td>telegram</td>
+                  <td>
+                  <a href="https://t.me/zolotyh">@zolotyh</a>
+                  </td>
+                </tr>
+                <tr>
+                  <td>email</td>
+                  <td>
+                    <a href="mailto:aazolotyh@gmail.com">
+                      aazolotyh@gmail.com
+                    </a>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+          
+        </section>
+        <section>
+          <img src="img/logo.svg" style="width: 60vw;" alt="Логотип компании &laquo;МойОфис&raquo;">
+        </section>
+        <section data-background="img/previous.png" >
+          <h2 style="background: rgba(255,255,255, 0.6); padding: 0.5em; backdrop-filter: blur(4px);font-weight: 700">Рефакторинг клиентского кода или как отрефакторить миллион строк кода и не сойти с ума</h2>
+        </section>
+        <section>
+          Все началось с одной задачи в Jira...
+        </section>
+        <section data-background-image="./img/disclaimer.webp"></section>
+        <section>
+          <img src="img/jira.png" alt="">
+        </section>
+        <section data-background="img/dart.jpeg" data-background-color="#000000">
+          <h3>Один из разработчиков берется за дело</h3>
+          <h3 style="backdrop-filter: blur(4px);font-weight: 700" class="fragment">Прошло всего 3 недели...</h3>
+          <h3 class="fragment" style="backdrop-filter: blur(4px);font-weight: 700">Вот мердж реквест с рефакторингом</h3>
+        </section>
+        <section>
+          <img src="img/sova.png" alt="">
+            <p>Мы не можем это смерджить...</p>
+        </section>
+        <section data-background="img/dart2.jpeg" data-background-color="#000" data-transition="fade none">
+          <h3 style="backdrop-filter: blur(4px);font-weight: 700">&mdash; А что не так?!</h3>
+        </section>
+        <section>
+          <img src="img/sova.png" alt="">
+            <p>Ты сделал код хуже!</p>
+        </section>
+        <section data-background-image="./img/luck1.jpg" data-background-position="bottom" data-transition="slide">&nbsp;</section>
+        <section data-background-image="./img/luck2.jpg" data-background-position="bottom" data-transition="slide" >&nbsp;</section>
+        <section data-background-image="./img/luck3.jpg" data-background-position="bottom" data-transition="slide" >&nbsp;</section>
+        <section data-background-image="./img/luck4.jpg" data-background-position="bottom" data-transition="slide" >&nbsp;</section>
+        <section data-background-image="./img/luck5.jpg" data-background-position="bottom" data-transition="slide" >&nbsp;</section>
+        <section>А что если попробовать разобраться?</section>
+        <section>
+          <img src="img/jira.png" alt="">
+        </section>
+        <section data-background="#0c0c0c">
+          <h1>1. Слово &laquo;Рефакторинг&raquo;</h1>
+        </section>
+        <section>Иногда слова меняют смысл</section>
+        <section>
+          <h2>Пошлый</h2>
+          <blockquote cite="">
+            Низкий в нравственном отношении, безвкусно-грубый, лишённый идейных интересов и запросов.
+          </blockquote>
+        </section>
+        <section>
+          <h2>Пошьлыи</h2>
+          <blockquote cite="">
+            <ul>
+              <li>старинный, исконный</li>
+              <li>искони принадлежавший</li>
+              <li>прежний, обычный</li>
+            </ul>
+          </blockquote>
+        </section>
+        <!-- <section> -->
+        <!--   <h1> -->
+        <!--     Слово &laquo;Мудак&raquo; -->
+        <!--   </h1> -->
+        <!--   <div class="fragment"> -->
+        <!--     <h3>10 лет назад</h3> -->
+        <!--     <p>глупый, несообразительный человек</p> -->
+        <!--   </div> -->
+        <!--   <div class="fragment"> -->
+        <!--     <h3>Сейчас</h3> -->
+        <!--     <p>наделяет себя особыми привилегиями в социальной жизни и чувствует себя неуязвимым для порицания</p> -->
+        <!--   </div> -->
+        <!-- </section> -->
+        <section>
+          А что не так с рефакторингом?!
+        </section>
+        <section data-transition="none">
+          <h2>Математика</h2>
+          <p>
+            <span style="color: tomato; font-weight: bolder">Re</span>factoring
+          </p>
+          <p>
+            <span style="font-weight: bolder; color: tomato">Re</span>: used to add the meaning "do again", especially to verbs
+            <sup>&nbsp;</sup>
+          </p>
+        </section>
+        <section data-transition="none">
+          <h2>Математика</h2>
+          <p>
+            Re<span style="color: tomato; font-weight: bolder">factoring</span>
+          </p>
+          <p class="fragment"><span style="font-weight: bolder; color: tomato">factoring:</span> x<sup>2</sup> + 4x + 3 => (x + 3)(x + 1)</p>
+        </section>
+        <section data-transition="none">
+          <h2>Изначально в IT</h2>
+          <blockquote cite="https://www.researchgate.net/publication/2498589_Refactoring_Object-Oriented_Frameworks">
+            This thesis denes a set of program restructuring operations (refactorings) that support the design, evolution and reuse of object-oriented application frameworks
+          </blockquote>
+          <p>1990 William F. Opdyke,</p>
+        </section>
+        <section data-transition="none">
+          <h2>Изначально в IT</h2>
+          <blockquote cite="https://www.researchgate.net/publication/2498589_Refactoring_Object-Oriented_Frameworks">
+            This thesis denes a <mark>set</mark> of program <mark>restructuring operations</mark> (refactorings) that support the design, <mark>evolution</mark> and reuse of object-oriented application frameworks
+          </blockquote>
+          <p>1990 William F. Opdyke,</p>
+        </section>
+        <section>
+          <h2>by Martin Fowler, with Kent Beck</h2>
+          <img src="./img/refact2.jpg" alt="">
+        </section>
+        <section data-transition="slide none">
+          <p>Refactoring is a controlled technique for improving the design of an existing code base. Its essence is applying a series of small behavior-preserving transformations, each of which "too small to be worth doing". </p>
+        </section>
+        <section data-transition="slide none">
+          <p>Refactoring is a controlled <mark>technique</mark> for improving the design of an existing code base. Its essence is <mark>applying</mark> a series of <mark>small behavior-preserving transformations</mark>, each of which "too small to be worth doing". </p>
+        </section>
+        <section>
+          <h2>Грубое описание</h2>
+          <ol>
+            <li class="fragment">Найти &laquo;Код с душком&raquo;</li>
+            <li class="fragment">Применить рефакторинг</li>
+            <li class="fragment">Повторять первые 2 пункта пока не станет хорошо</li>
+          </ol>
+        </section>
+        <section>
+          Пример
+        </section>
+        <section>
+          <h2>Код с душком</h2>
+          <pre><code style="font-size: 0.8em" class="jsx" data-trim >
+function Card({ card }) {
+  if (card.type === &#39;news&#39;) {
+    return &lt;NewsCard card={card} /&gt;;
+  }
+  if (card.type === &#39;post&#39;) {
+    return &lt;PostCard card={card} /&gt;;
+  }
+  if (card.type === &#39;user&#39;) {
+    return &lt;UserCard card={card} /&gt;;
+  }
+  return &lt;DefaultCard card={card} /&gt;;
+}
+          </code></pre>
+        </section>
+        <section>
+          <h2>Рефакторинг</h2>
+          <pre><code data-trim data-noescape>
+const CARDS = {
+  news: NewsCard,
+  post: PostCard,
+  user: UserCard,
+}
+          </code></pre>
+          <pre class="fragment"><code class="jsx" data-trim data-noescape>
+function Card({ card }) {
+  const Component = CARDS[card.type] || DefaultCard;
+  return &lt;Component card={card} /&gt;
+}
+          </code></pre>
+        </section>
+        <section>
+          <h3>
+            Принципы
+          </h3>
+          <ul>
+            <li class="fragment">Постоянный процесс</li>
+            <li class="fragment">Небольшие изменения</li>
+            <li class="fragment">Правило туриста</li>
+          </ul>
+        </section>
+        <section>
+          <h2>Список основных рефакторингов</h2>
+          <p>
+          <a href="https://refactoring.com/catalog/">refactoring.com/catalog</a>
+          </p>
+          <h2>Список codesmells</h2>
+          <p>
+            <a href="https://luzkan.github.io/smells/">luzkan.github.io/smells/</a>
+          </p>
+        </section>
+        <section>
+          <h2>многое уже есть в IDE</h2>
+          <img style="height: 40vh;" src="./img/ide_refactoring.png" alt="">
+        </section>
+        <section>
+          <h2>SonarQube &mdash; наше все!</h2>
+          <img src="./img/sonar_1.png" alt="">
+          <p class="fragment">Платный, есть бесплатная версия</p>
+        </section>
+        <section>
+          <h2>Работаем с мердж реквестами</h2>
+          <p>
+            <a href="https://github.com/mc1arke/sonarqube-community-branch-plugin">sonarqube-community-branch-plugin</a>
+          </p>
+          <img src="img/request.png" alt="">
+        </section>
+        <section>
+          <h2>Об проблемах в реальном времени</h2>
+          <ul>
+            <li><a href="https://www.sonarsource.com/products/sonarlint/">SonarLint</a></li>
+            <li><a href="https://github.com/SonarSource/eslint-plugin-sonarjs">eslint-plugin-sonarjs</a></li>
+          </ul>
+        </section>
+        <section>
+          <img src="img/sonarlint.png" alt="">
+        </section>
+        <section>
+          <p>Альтернативы</p>
+          <ul>
+            <li><a href="https://www.codacy.com/">codacy.com</a></li>
+            <li><a href="https://codeclimate.com/">codeclimate.com</a></li>
+            <li><a href="https://www.codiga.io/">codiga.io</a></li>
+          </ul>
+        </section>
+        <section data-transition="none">
+          <h2>Современность</h2>
+          <blockquote cite="">
+            code refactoring is the process of restructuring existing computer code changing the factoring without changing its external behavior
+          </blockquote>
+          <p>Wikipedia, 2023</p>
+        </section>
+        <section data-transition="none">
+          <h2>Современность</h2>
+          <blockquote cite="">
+            code refactoring is the <mark>process</mark> of restructuring existing computer <mark>code changing</mark> the factoring <mark>without changing its external behavior</mark>
+          </blockquote>
+          <p>Wikipedia, 2023</p>
+        </section>
+        <section>
+          <img src="img/jira.png" alt="">
+        </section>
+        <section>
+          <h2>Подмена понятий</h2>
+          <p>Переписать на хуки != отрефакторить</p>
+        </section>
+        <section data-transition="none">
+          <img style="height: 30vh;" src="img/pushkin.jpeg" alt="">
+          <p>
+            <span style="color: tomato">Было:</span> меняем структуру эволюционно и улучшаем код
+          </p>
+        </section>
+        <section data-transition="none">
+          <img style="height: 30vh;" src="img/lerm.png" alt="">
+          <p>
+            <span style="color: tomato">Стало:</span> все время все переписываем, потому что так сказал Фаулер
+          </p>
+        </section>
+        <section data-background-color="tomato">
+          <h1>Ошибка 1: недопонимание</h1>
+          <p class="fragment">Разное понимание задачи</p>
+          <p class="fragment">Разрабочик: нужно переписать на хуки</p>
+          <p class="fragment">Тимлид: нужно сделать код чище</p>
+        </section>
+        <section data-background="#0c0c0c">
+          <h1>2. Проблема с самооценкой и долгий путь не туда</h1>
+        </section>
+        <section data-background="img/dart.jpeg" data-background-color="#000000">
+          <h3 style="backdrop-filter: blur(4px);font-weight: 700">Прошло всего 3 недели...</h3>
+        </section>
+        <section data-background-color="tomato">
+          <h1>Ошибка 2: оставили одного</h1>
+          <p class="fragment">Нужно чаще синхронизироваться</p>
+        </section>
+        <section>
+          А что помешало смерджить код?!
+        </section>
+        <section data-background="#0c0c0c">
+          <h1>3. Плохой и хороший код</h1>
+        </section>
+        <section data-transition="none">
+          <p>Код для людей</p>
+          <blockquote cite="https://web.mit.edu/6.001/6.037/sicp.pdf">
+            <p>
+Programs must be written for people to read, and only incidentally for machines to execute.
+            </p>
+            <footer>—Harold Abelson, <cite> Structure and Interpretation of Computer Programs</cite></footer>
+          </blockquote>
+        </section>
+        <section data-transition="none">
+          <p>Код для людей</p>
+          <blockquote cite="https://web.mit.edu/6.001/6.037/sicp.pdf">
+            <p>
+              Programs must be written <mark>for people</mark> to read, and <mark>only incidentally for machines</mark> to execute.
+            </p>
+            <footer>—Harold Abelson, <cite> Structure and Interpretation of Computer Programs</cite></footer>
+          </blockquote>
+        </section>
+        <section>
+          Человек ограничен
+        </section>
+        <section>
+          <h2>Плохой жесткий диск</h2>
+          <img src="./img/ebin.jpeg" alt="">
+        </section>
+        <section>
+          <h2>Плохой CPU и мало Memory</h2>
+          <p class="fragment">Кошелек Миллера и Система 1 от Канемана</p>
+        </section>
+        <section>
+          <p>
+            Нужно писать простой код
+          </p>
+          <p class="fragment">Проще сказать, чем сделать</p>
+        </section>
+        <section>
+          Есть же SOLID, DRY, KISS, SLA, GRASP, YAGNI!
+        </section>
+        <section>
+          <h2>Пример когда принципы не работают</h2>
+          <p class="fragment">SLA vs KISS</p>
+        </section>
+        <section>
+          <h2>SLA single layer of abstraction</h2>
+          <p>Каждый метод должен быть написан в терминах одного уровня абстракции</p>
+          <aside class="notes">
+            Пример со скоростью и с передачей и оборотами
+          </aside>
+        </section>
+        <section>
+          <p>Успею ли я к началу выступления (через час)?</p>
+          <pre><code class="javascript" data-trim>
+const distance = map.getDistance();
+const speed =  car.getSpeed(speed);
+return distance/speed &lt;= 1            
+          </code></pre>
+        </section>
+        <section>
+          <p>Добавим передачу и обороты вместо скорости</p>
+          <pre><code data-trim class="javascript" data-line-numbers="1-20|1-8|10-11|13-16|18-20">
+# передаточные числа
+const GEARS = {
+  '1': 6.55,
+  '2': 3.09,
+  '3': 1.71,
+  '4': 1.00,
+  'R': 7.77
+}
+
+# считаем дистанцию
+const distance = map.getDistance();
+
+# параметры авто
+const rotationSpeed = car.getCurrentRotationSpeed();
+const gear = car.getCurrentGear();
+const radius = car.getWheelRadius();            
+
+# успеем ли?
+return (distance * 1000 * GEARS[gears]) / 
+       (rotationSpeed * 60 * Math.PI * R) &lt;= 1
+          </code></pre>
+        </section>
+        
+        <section>
+          <h2>KISS</h2>
+          <p>Keep it simple, stupid</p>
+          <p class="fragment">&mdash; А точно ли это проблема?</p>
+        </section>
+        <section>
+          <h2>MIMC</h2>
+          <p>More Is More Complex </p>
+          <p class="fragment">Больше строчек - дороже поддержка</p>
+        </section>
+        <section>
+          <h2>Нужно просветление, чтобы понять</h2>
+
+          <p class="fragment" data-fragment-index="0">Пример:</p>
+          <blockquote cite="" data-fragment-index="0" class="fragment">
+            Должен существовать один и, желательно, только один очевидный способ сделать это.
+          </blockquote>
+        </section>
+        <section>
+          <h2>Принципы хорошо работают после</h2>
+          <pre><code data-trim data-noescape>
+const CARDS = {
+  news: NewsCard,
+  post: PostCard,
+  user: UserCard,
+}
+function Card({ card }) {
+  const Component = CARDS[card.type] || DefaultCard;
+  return &lt;Component card={card} /&gt;
+}
+          </code></pre>
+        </section>
+        <section data-background-color="tomato">
+          <h1>Ошибка 3: субъективность</h1>
+          <p class="fragment">Субъективная оценка</p>
+          <p class="fragment">Ссылка на принцыпы в качестве аргумента</p>
+        </section>
+        <section>
+          Некоторые принципы все-таки можно использовать
+        </section>
+        <section>
+          <p>
+            Low Coupling (низкая связанность) и <br>High Cohesion (высокое зацепление)
+          </p>
+          <img style="height: 10em" src="img/1.png" alt="">
+        </section>
+        <section>
+          <p>
+            1. Идеальная ситуация
+          </p>
+          <img style="height: 10em;" src="img/2.png" alt="">
+        </section>
+        <section>
+          <p>
+            2. Все в одном
+          </p>
+          <img style="height: 10em;" src="img/3.png" alt="">
+        </section>
+        <section>
+          <p>
+            3. Неправильные границы
+          </p>
+          <img style="height: 10em;" src="img/4.png" alt="">
+        </section>
+        <section>
+          <p>
+            4. Мастер SOLID
+          </p>
+          <img style="height: 10em;" src="img/5.png" alt="">
+        </section>
+        <section>
+          <h2>
+            Можно считать через метрики AST
+          </h2>
+          <p>Tracking health over debt</p>
+        </section>
+        <section>
+          <aside class="notes">
+           Отток кода (также известный как переделка) — это показатель, который показывает, как часто данный фрагмент кода — например, файл, класс, функция — редактируется. Как вы скоро увидите, если данный фрагмент кода получает изменения слишком часто, обычно это плохой знак. 
+          </aside>
+          <p>
+            Как можно найти?
+          </p>
+          <ul>
+            <li class="fragment">Сложность кода (cyclomatic complexity vs cognitive complexity)</li>
+            <li class="fragment">Текучесть (code churn)</li>
+            <li class="fragment">Кол-во зависимостей</li>
+            <li class="fragment">Размер файла в строках</li>
+            <li class="fragment">Покрытие тестами</li>
+          </ul>
+        </section>
+        <section>
+          <aside class="notes">
+            <p>Набор метрик Чидамбера и Кемерера 1994</p>
+            <p>WMC кол-во методов в классе</p>
+            <p>DIT - глубина наследования</p>
+            <p>CBO - кол-во зацеплений между классами</p>
+          </aside>
+          <p>
+            Chidamber & Kemerer object-oriented metrics suite (<a href="https://www.aivosto.com/project/help/pm-oo-ck.html">shorturl.at/kOS28</a>)
+          </p>
+          <ul>
+            <li>WMC Weighted Methods Per Class</li>
+            <li>DIT Depth of Inheritance Tree</li>
+            <li>NOC Number of Children</li>
+            <li>CBO Coupling between Object Classes</li>
+            <li>RFC and RFC´ Response for a Class</li>
+            <li>LCOM(4) Lack of Cohesion of Methods</li>
+          </ul>
+        </section>
+        <section>
+          <h2>Code Complexity</h2>
+          <pre><code data-trim data-noescape>
+$ npx code-complexity . --sort=score --limit=3
+
+┌──────────────────────────────┬────────────┬───────┬───────┐
+│ file                         │ complexity │ churn │ score │
+├──────────────────────────────┼────────────┼───────┼───────┤
+│ src/cli.ts                   │ 103        │ 8     │ 824   │
+├──────────────────────────────┼────────────┼───────┼───────┤
+│ test/code-complexity.test.ts │ 107        │ 7     │ 749   │
+├──────────────────────────────┼────────────┼───────┼───────┤
+│ .idea/workspace.xml          │ 123        │ 6     │ 738   │
+└──────────────────────────────┴────────────┴───────┴───────┘
+          </code></pre>
+        </section>
+        <section data-background-color="tomato">
+          <h1>Ошибка 4: метрики</h1>
+          <p class="fragment">Не было метрик</p>
+        </section>
+        <section>
+          <h2>Ошибки</h2>
+          <ul>
+            <li class="fragment">Разное понимание задачи</li>
+            <li class="fragment">Работали без плана</li>
+            <li class="fragment">Не синхронизировались</li>
+            <li class="fragment">Не было дизайна</li>
+            <li class="fragment">Не было метрик</li>
+          </ul>
+        </section>
+        <section>
+          <h2>Выводы</h2>
+          <ul>
+            <li class="fragment">Правило туриста</li>
+            <li class="fragment">Авто ревью: Sonar, SonarLint, eslint</li>
+            <li class="fragment">Синхронизация по пониманию задач</li>
+            <li class="fragment">Слон по частям</li>
+            <li class="fragment">Договариваемся о дизайне</li>
+            <li class="fragment">Метрики</li>
+            <li class="fragment">Не спорим о принципах</li>
+          </ul>
+        </section>
+        <section>
+          <h3>Спасибо!</h3>
+          <div style="display: flex; flex-direction: row;">
+            <div>
+              <p>Отзыв</p>
+              <img src="img/qr.jpeg" alt="">
+            </div>
+            <div>
+              <p>Слайды</p>
+              <img src="img/qr.jpeg" alt="">
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script>
+      // More info about initialization & config:://revealjs.com/config/
+      Reveal.initialize({
+        hash: true,
+        slideNumber: true,
+        backgroundTransition: 'none',
+
+        // Learn about plugins: https://revealjs.com/plugins/
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+      });
+    </script>
+  </body>
+</html>

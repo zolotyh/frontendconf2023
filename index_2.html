@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>reveal.js</title>
+    <link rel="stylesheet" href="dist/reset.css" />
+    <link rel="stylesheet" href="dist/reveal.css" />
+    <link rel="stylesheet" href="dist/csshake.min.css" />
+    <link rel="stylesheet" href="dist/theme/white.css" />
+    <link
+      rel="preload"
+      href="./dist/theme/fonts/work/subset-YanoneKaffeesatz-ExtraLight.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link rel="stylesheet" href="plugin/highlight/monokai.css" />
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>Рефакторинг приложений на javascript и не только</section>
+        <section>
+          TODO: примеры того, как используется слово рефакторинг
+          <p class="fragment">
+            Хочу отрефакторить этот компонент, потому что в нем кто-то
+            наговнокодил
+          </p>
+          <p class="fragment">
+            Хочу отрефакторить процесс загрузки нашего приложения, потому что
+            там много багов
+          </p>
+        </section>
+        <section>История про кривой мердж реквест</section>
+        <section>
+          <h2>1. Рефакторинг, как термин</h2>
+        </section>
+        <section>
+          <h2>Термин &laquo;рефакторинг&raquo;</h2>
+        </section>
+        <section data-transition="slide none">
+          <b>code refactoring</b> is the process of restructuring existing
+          computer code changing the factoring without changing its external
+          behavior
+        </section>
+        <section data-transition="none none">
+          code refactoring is <mark>the process</mark> of restructuring existing
+          computer code changing the factoring without changing its external
+          behavior
+        </section>
+        <section data-transition="none none">
+          code refactoring is the process of
+          <mark>restructuring existing computer code</mark> changing the
+          factoring without changing its external behavior
+        </section>
+        <section data-transition="none none">
+          code refactoring is the process of restructuring existing computer
+          code changing the factoring
+          <mark>without changing its external behavior</mark>
+        </section>
+        <section>
+          <p>Benefits of refactoring:</p>
+          <ul>
+            <li>Maintainability</li>
+            <li>Extensibility</li>
+          </ul>
+        </section>
+        <section>
+          <p>Как в теории работает рефакторинг</p>
+          <a
+            href="https://obaranovskyi.medium.com/typescript-use-polymorphism-in-place-of-the-switch-and-other-conditionals-1cfcc705bcc1"
+            >Conditionals =&gt; Polymorphism</a
+          >
+        </section>
+        <section>
+          <img
+            src="img/Cursor_and_Replace_Conditional_with_Polymorphism.png"
+            alt=""
+          />
+        </section>
+        <section>На практике все сложнее...</section>
+        <section>
+          <p>Я хочу отрефакторить</p>
+          <p class="fragment">Я хочу переделать</p>
+        </section>
+        <section>Плохой код =&gt; хороший код</section>
+        <section>
+          <table>
+            <tr>
+              <th>До</th>
+              <th>После</th>
+            </tr>
+            <tr>
+              <td class="fragment" data-fragment-index="0">Непонятно</td>
+              <td class="fragment" data-fragment-index="1">Понятно</td>
+            </tr>
+            <tr>
+              <td class="fragment" data-fragment-index="0">
+                Сложно делать изменения
+              </td>
+              <td class="fragment" data-fragment-index="1">
+                Легко делать изменения
+              </td>
+            </tr>
+            <tr>
+              <td class="fragment" data-fragment-index="0">Некрасиво</td>
+              <td class="fragment" data-fragment-index="1">Красиво</td>
+            </tr>
+            <tr>
+              <td class="fragment" data-fragment-index="0">Неоптимально</td>
+              <td class="fragment" data-fragment-index="1">Оптимально</td>
+            </tr>
+          </table>
+          <p class="fragment">Слишком субъективно</p>
+        </section>
+        <section>
+          А что тогда объективно?
+          <p class="fragment">Какой код хороший</p>
+        </section>
+        <section>
+          <h2>2. Как рефакторить</h2>
+        </section>
+        <section>Код почти всегда пишется для людей</section>
+        <section>Принципы написания хорошего кода</section>
+        <section>Большинстов принципов - максимы</section>
+        <section>
+          <p>Максима</p>
+          <p class="fragment">
+            моральное правило или принцип поведения, для которого свойственна
+            предельная общность и обязательность
+          </p>
+        </section>
+        <section>
+          <ul>
+            <li>Beautiful is better than ugly.</li>
+            <li>Explicit is better than implicit.</li>
+            <li>Simple is better than complex.</li>
+            <li>Complex is better than complicated.</li>
+            <li>Flat is better than nested.</li>
+            <li>Sparse is better than dense.</li>
+            <li>Readability counts.</li>
+            <li>Special cases aren't special enough to break the rules.</li>
+            <li>Although practicality beats purity.</li>
+            <li>Errors should never pass silently.</li>
+            <li>Unless explicitly silenced.</li>
+            <li>In the face of ambiguity, refuse the temptation to guess.</li>
+            <li>
+              There should be one-- and preferably only one --obvious way to do
+              it.
+            </li>
+            <li>
+              Although that way may not be obvious at first unless you're Dutch.
+            </li>
+            <li>Now is better than never.</li>
+            <li>Although never is often better than *right* now.</li>
+            <li>If the implementation is hard to explain, it's a bad idea.</li>
+            <li>
+              If the implementation is easy to explain, it may be a good idea.
+            </li>
+            <li>
+              Namespaces are one honking great idea -- let's do more of those!
+            </li>
+          </ul>
+        </section>
+        <section>Максимы помогают, но не всегда</section>
+        <section>
+          Принципы конфликтуют
+          <p>KISS vs Generalization Principle</p>
+        </section>
+        <section>Почему я не люблю SOLID</section>
+        <section>Принципы, которые можно померить</section>
+        <section>Low Coupling and High Cohesion</section>
+        <section><img src="img/1.png" alt="" /></section>
+        <section><img src="img/2.png" alt="" /></section>
+        <section><img src="img/3.png" alt="" /></section>
+        <section><img src="img/4.png" alt="" /></section>
+        <section><img src="img/5.png" alt="" /></section>
+        <section>SonarQube</section>
+        <section>Code smells</section>
+        <section>Работа по Фаулеру (https://refactoring.com/catalog/)</section>
+        <section>Правило туриста</section>
+        <section>Реинжиниринг vs Рефакторинг</section>
+        <section>
+          <img src="img/Cursor_and_Reengineering_-_Wikipedia.png" alt="" />
+        </section>
+        <section>
+          <h2>
+            3. Большой рефакторинг
+          </h2>
+        </section>
+        <section>Trunk based development и рефакторинг за флагами</section>
+        <section>Тестирование перед рефакторингом (unit не работает, лучше использовать e2e)</section>
+        <section>Автоматизированные изменения</section>
+        <section>Автоматизация не помогает упростить код</section>
+        <section>Eslint, JSCodeShift, </section>
+        <section>Автоматические миграции кода  (Gulp and git reset --hard)</section>
+        <section>План рефакторинга</section>
+        <section>RFC (как мы их применяем)</section>
+        <section>
+          <h2>
+            4. Психология
+          </h2>
+        </section>
+        <section>
+          Про запоминание (кривые запоминания)
+        </section>
+        <section>
+          Искажения (сайт как помидор)
+        </section>
+        <section>
+          <h2>5. Выводы</h2>
+          <ul>
+            <li class="frgament">Планирование рефакторинга заранее (большие изменения)</li>
+            <li class="frgament">Мелкий рефакторинг делаем вместе с задачей</li>
+            <li class="frgament">Указываем DOD/AC (Избавится о класса, пофиксить все CodeSmells, написать тесты)</li>
+            <li class="frgament">Используем SonarQube/Eslint (расширенный)</li>
+          </ul>
+        </section>
+      </div>
+    </div>
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script>
+      // More info about initialization & config:
+      // - https://revealjs.com/initialization/
+      // - https://revealjs.com/config/
+      Reveal.initialize({
+        hash: true,
+        slideNumber: true,
+
+        // Learn about plugins: https://revealjs.com/plugins/
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+      });
+    </script>
+  </body>
+</html>
