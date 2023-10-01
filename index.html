@@ -296,13 +296,6 @@ function Card({ card }) {
           </blockquote>
           <p>Wikipedia, 2023</p>
         </section>
-        <section>
-          <img src="img/jira.png" alt="">
-        </section>
-        <section>
-          <h2>Подмена понятий</h2>
-          <p>Переписать на хуки != отрефакторить</p>
-        </section>
         <section data-transition="none">
           <img style="height: 30vh;" src="img/pushkin.jpeg" alt="">
           <p>
@@ -314,6 +307,13 @@ function Card({ card }) {
           <p>
             <span style="color: tomato">Стало:</span> все время все переписываем, потому что так сказал Фаулер
           </p>
+        </section>
+        <section>
+          <img src="img/jira.png" alt="">
+        </section>
+        <section>
+          <h2>Подмена понятий и плохое описание задачи</h2>
+          <p>Переписать на хуки != отрефакторить</p>
         </section>
         <section data-background-color="tomato">
           <h1>Ошибка 1: недопонимание</h1>
@@ -368,7 +368,7 @@ Programs must be written for people to read, and only incidentally for machines 
         </section>
         <section>
           <p>
-            Нужно писать простой код
+            Нужно писать простой, понятный и поддерживаемый код
           </p>
           <p class="fragment">Проще сказать, чем сделать</p>
         </section>
@@ -376,8 +376,7 @@ Programs must be written for people to read, and only incidentally for machines 
           Есть же SOLID, DRY, KISS, SLA, GRASP, YAGNI!
         </section>
         <section>
-          <h2>Пример когда принципы не работают</h2>
-          <p class="fragment">SLA vs KISS</p>
+          <h2>Давайте на примере!</h2>
         </section>
         <section>
           <h2>SLA single layer of abstraction</h2>
@@ -407,12 +406,12 @@ const GEARS = {
 }
 
 # считаем дистанцию
-const distance = map.getDistance();
+const distance = getDistance();
 
 # параметры авто
-const rotationSpeed = car.getCurrentRotationSpeed();
-const gear = car.getCurrentGear();
-const radius = car.getWheelRadius();            
+const rotationSpeed = getCurrentRotationSpeed();
+const gear = getCurrentGear();
+const radius = getWheelRadius();            
 
 # успеем ли?
 return (distance * 1000 * GEARS[gears]) / 
@@ -424,6 +423,26 @@ return (distance * 1000 * GEARS[gears]) /
           <h2>KISS</h2>
           <p>Keep it simple, stupid</p>
           <p class="fragment">&mdash; А точно ли это проблема?</p>
+        </section>
+        <section data-transition="none">
+          <pre><code class="javascript" data-trim>
+const distance = map.getDistance();
+const speed =  car.getSpeed(speed);
+return distance/speed &lt;= 1            
+          </code></pre>
+        </section>
+        <section data-transition="none">
+          <pre><code class="javascript" data-trim>
+class Car {
+  getSpeed(){...}
+}
+
+const car = new Car();
+
+const distance = map.getDistance();
+const speed =  car.getSpeed(speed);
+return distance/speed &lt;= 1            
+          </code></pre>
         </section>
         <section>
           <h2>MIMC</h2>
