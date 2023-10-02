@@ -24,16 +24,25 @@
     pre>code {
        font-weight: normal
     }
+    @font-face { 
+      font-family: "TTTravels";
+      src: url("dist/theme/fonts/TTTravelsDemiBold.eot");
+      src: url("dist/theme/fonts/TTTravelsDemiBold.eot?#iefix")format("embedded-opentype"),
+      url("dist/theme/fonts/TTTravelsDemiBold.woff") format("woff"),
+      font-style: normal;
+      font-weight: 600;
+   }
     </style>
   </head>
   <body>
     <div class="reveal">
       <div class="slides">
-        <section>
-          <h1 class="r-fit-text">
-            Рефакторинг 
-          </h1>
-          <h3 class="r-fit-text">приложений на <b class="animate__animated animate__bounce">JavaScript</b><br> и не только</h3>
+        <section data-background="./img/titul.png">
+          <h3 style="font-family:TTTravels, Arial, Helvetica, sans-serif; text-transform: none;">
+            Рефакторинг <br/>
+приложений на <b class="animate__animated animate__bounce">JavaScript</b><br> и не только 
+          </h3>
+          <p style="text-align: right; font-family: 'TTTravels', Arial, Helvetica, sans-serif;">Алексей Золотых</p>
         </section>
           
         <section>
@@ -88,7 +97,7 @@
         <section data-background="img/dart.jpeg" data-background-color="#000000">
           <h3>Один из разработчиков берется за дело</h3>
           <h3 style="backdrop-filter: blur(4px);font-weight: 700" class="fragment">Прошло всего 3 недели...</h3>
-          <h3 class="fragment" style="backdrop-filter: blur(4px);font-weight: 700">Вот мердж реквест с рефакторингом</h3>
+          <h3 class="fragment" style="backdrop-filter: blur(4px);font-weight: 700">Вот мердж-реквест с рефакторингом</h3>
         </section>
         <section>
           <img src="img/sova.png" alt="">
@@ -106,7 +115,7 @@
         <section data-background-image="./img/luck3.jpg" data-background-position="bottom" data-transition="slide" >&nbsp;</section>
         <section data-background-image="./img/luck4.jpg" data-background-position="bottom" data-transition="slide" >&nbsp;</section>
         <section data-background-image="./img/luck5.jpg" data-background-position="bottom" data-transition="slide" >&nbsp;</section>
-        <section>А что если попробовать разобраться?</section>
+        <section>А что, если попробовать разобраться?</section>
         <section>
           <img src="img/jira.png" alt="">
         </section>
@@ -192,7 +201,7 @@
           <ol>
             <li class="fragment">Найти &laquo;Код с душком&raquo;</li>
             <li class="fragment">Применить рефакторинг</li>
-            <li class="fragment">Повторять первые 2 пункта пока не станет хорошо</li>
+            <li class="fragment">Повторять первые 2 пункта, пока не станет хорошо</li>
           </ol>
         </section>
         <section>
@@ -261,7 +270,7 @@ function Card({ card }) {
           <p class="fragment">Платный, есть бесплатная версия</p>
         </section>
         <section>
-          <h2>Работаем с мердж реквестами</h2>
+          <h2>Работаем с мердж-реквестами</h2>
           <p>
             <a href="https://github.com/mc1arke/sonarqube-community-branch-plugin">sonarqube-community-branch-plugin</a>
           </p>
@@ -310,6 +319,9 @@ function Card({ card }) {
           <p>
             <span style="color: tomato">Стало:</span> все время все переписываем, потому что так сказал Фаулер
           </p>
+        </section>
+        <section>
+          <p>Автоматический рефакторинг на AST</p>
         </section>
         <section>
           <img src="img/jira.png" alt="">
@@ -586,13 +598,19 @@ $ npx code-complexity . --sort=score --limit=3
           <h2>Выводы</h2>
           <ul>
             <li class="fragment">Правило туриста</li>
-            <li class="fragment">Авто ревью: Sonar, SonarLint, eslint</li>
+            <li class="fragment">Автоматическое ревью: Sonar, SonarLint, eslint</li>
             <li class="fragment">Синхронизация по пониманию задач</li>
             <li class="fragment">Слон по частям</li>
             <li class="fragment">Договариваемся о дизайне</li>
             <li class="fragment">Метрики</li>
             <li class="fragment">Не спорим о принципах</li>
           </ul>
+        </section>
+        <section>
+          <p>
+            PS: Про автотесты
+          </p>
+          <p>Пирамида и трофей</p>
         </section>
         <section>
           <h3>Спасибо!</h3>
