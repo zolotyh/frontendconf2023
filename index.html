@@ -42,7 +42,7 @@
             Рефакторинг <br/>
 приложений на <b class="animate__animated animate__bounce">JavaScript</b><br> и не только 
           </h3>
-          <p style="text-align: right; font-family: 'TTTravels', Arial, Helvetica, sans-serif;">Алексей Золотых</p>
+          <p style="text-align: right; font-family: 'TTTravels', Arial, Helvetica, sans-serif;">Алексей Золотых, МойОфис</p>
         </section>
           
         <section>
@@ -111,11 +111,11 @@
             <p>Ты сделал код хуже!</p>
         </section>
         <section>А что, если попробовать разобраться?</section>
-        <section data-background-image="./img/luck1.jpg" data-background-position="bottom" data-transition="slide">&nbsp;</section>
-        <section data-background-image="./img/luck2.jpg" data-background-position="bottom" data-transition="slide" >&nbsp;</section>
-        <section data-background-image="./img/luck3.jpg" data-background-position="bottom" data-transition="slide" >&nbsp;</section>
-        <section data-background-image="./img/luck4.jpg" data-background-position="bottom" data-transition="slide" >&nbsp;</section>
-        <section data-background-image="./img/luck5.jpg" data-background-position="bottom" data-transition="slide" >&nbsp;</section>
+        <!-- <section data-background-image="./img/luck1.jpg" data-background-position="bottom" data-transition="slide">&nbsp;</section> -->
+        <!-- <section data-background-image="./img/luck2.jpg" data-background-position="bottom" data-transition="slide" >&nbsp;</section> -->
+        <!-- <section data-background-image="./img/luck3.jpg" data-background-position="bottom" data-transition="slide" >&nbsp;</section> -->
+        <!-- <section data-background-image="./img/luck4.jpg" data-background-position="bottom" data-transition="slide" >&nbsp;</section> -->
+        <!-- <section data-background-image="./img/luck5.jpg" data-background-position="bottom" data-transition="slide" >&nbsp;</section> -->
         <section>
           <img src="img/jira.png" alt="">
         </section>
@@ -342,15 +342,27 @@ function Card({ card }) {
         <section data-background="img/dart.jpeg" data-background-color="#000000">
           <h3 style="backdrop-filter: blur(4px);font-weight: 700">Прошло всего 3 недели...</h3>
         </section>
+        <section>
+          <p>Чем больше вкладываешься &mdash; тем больше ценишь</p>
+        </section>
+        <section>
+          <p>На то, чтобы понять, что что-то не так, ушло 3 недели</p>
+          <p class="fragment">Можно понимать такие вещи гораздо быстрее</p>
+        </section>
         <section data-background-color="#fff204">
           <h1>Ошибка 2: оставили одного</h1>
           <p class="fragment">Нужно чаще синхронизироваться</p>
+          <p class="fragment">Нужно проверять, что задача понята правильно</p>
         </section>
         <section>
           А что помешало смерджить код?!
         </section>
-        <section data-background="#0c0c0c">
-          <h1>3. Плохой и хороший код</h1>
+        <section data-background="#0c0c0c" data-transition="none">
+          <h3>3. Плохой и хороший код</h3>
+        </section>
+        <section data-background="#0c0c0c" data-transition="none" data-auto-animate>
+          <h3><strike>3. Плохой и хороший код</strike></h3>
+          <h3>3. Подходящий и неподходящий</h3>
         </section>
         <section data-transition="none">
           <p>Код для людей</p>
@@ -374,7 +386,7 @@ Programs must be written for people to read, and only incidentally for machines 
           Человек ограничен
         </section>
         <section>
-          <h2>Плохой жесткий диск</h2>
+          <h2>Плохо запоминает</h2>
           <img src="./img/ebin.jpeg" alt="">
         </section>
         <section>
@@ -471,6 +483,57 @@ return distance/speed &lt;= 1
           <blockquote cite="" data-fragment-index="0" class="fragment">
             Должен существовать один и, желательно, только один очевидный способ сделать это.
           </blockquote>
+        </section>
+        <section>
+          <h2>Про длинну</h2>
+          <p>Массив</p>
+          <pre><code data-trim class="javascript">
+const arr = [1,2,3]
+console.log(arr.lenght); //3          
+          </code></pre>
+          <p>Set</p>
+          <pre><code data-trim class="javascript">
+const set = new Set([1,2,3,4])
+console.log(set.lenght); // undefined           
+console.log(set.size); // 3
+          </code></pre>
+        </section>
+        <section>
+          <h2>Python</h2>
+          <p>Массив</p>
+          <pre><code class="python" data-trim>
+mylist = ['apple', 'banana', 'cherry']
+len(mylist)
+          </code></pre>
+          <p>Set</p>
+          <pre ><code data-trim class="python">
+lst = [1, 2, 3, 4, 5, 6]
+len(set(lst))
+          </code></pre>
+        </section>
+        <section style="font-size: 0.8em">
+          <p>Поддержка len для любого класса</p>
+          <pre><code data-trim class="python" data-line-numbers="1-9|5-6|5-6,9">
+class Bag:
+    def __init__(self, item_count):
+        self.item_count = item_count
+
+    def __len__(self):
+        return self.item_count
+
+mybag = Bag(10)
+print(len(mybag))
+          </code></pre>
+          <div class="fragment">
+            <p>А в JavaScript</p>
+            <pre><code data-trim>
+const obj = {
+  get length() {
+    ...
+  }
+};
+            </code></pre>
+          </div>
         </section>
         <section>
           <h2>Принципы хорошо работают после</h2>
@@ -612,7 +675,7 @@ $ npx code-complexity . --sort=score --limit=3
           </p>
           <p>Пирамида и трофей</p>
         </section>
-        <section>
+        <section data-background-color="#fff204">
           <h3>Спасибо!</h3>
           <div style="display: flex; flex-direction: row; justify-items: center; align-items: center; justify-content: center; ">
             <div>
